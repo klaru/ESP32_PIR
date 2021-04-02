@@ -1,15 +1,16 @@
 from machine import Pin, reset, freq, unique_id
+from sys import platform
 from time import sleep
 from ubinascii import hexlify
 from boot import load_config
 from umqttsimple import MQTTClient
 
 # LED is active HIGH on ESP32 and active LOW on ESP8266
-if freq() > 80000000:               # ESP32
+if platform == "esp32":               
     ledon = 1
     ledoff = 0
     pirpin = 17
-else:                               # ESP8266
+elif platform == "esp8266":                              
     ledon = 0
     ledoff = 1
     pirpin = 0
